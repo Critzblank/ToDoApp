@@ -1,25 +1,38 @@
 import React, { Component } from 'react';
+import {StackNavigator} from "react-navigation";
+
 import {
     Platform,
     StyleSheet,
     Text,
-    View
+    View,
+    Dimensions
 } from 'react-native';
 
-
 import Index from "./src/components/index";
-
+import ToDo from "./src/components/ToDo";
 
 class App extends Component {
 
     render() {
+        const MainNavigator = StackNavigator({
+            Index: {screen: Index},
+            ToDo: {screen: ToDo}
+        });
         return (
-            <View >
-                <Index/>
+            <View style={styles.container}>
+                <MainNavigator style={{ width: Dimensions.get('window').width }}/>
             </View>
 
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff'
+    }
+});
 
 export default App;
