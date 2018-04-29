@@ -1,7 +1,13 @@
 import React, {Component} from 'react';
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, TextInput } from "react-native";
 
 class ToDo extends Component {
+
+    constructor(props){
+
+        super(props);
+        this.state = {Task: ''};
+    }
 
     static navigationOptions = () => {
         return {
@@ -17,13 +23,11 @@ class ToDo extends Component {
     render() {
         return(
             <View>
-                <Text>
 
-                </Text>
-
-                <Text>
-
-                </Text>
+                    <TextInput
+                        style = {styles.inputStyle}
+                        placeholder = "Enter Your Task"
+                    />
 
             </View>
         )
@@ -31,4 +35,10 @@ class ToDo extends Component {
 
 }
 
+
+const styles = {
+    inputStyle:{
+        height: 50
+    }
+}
 export default ToDo;
