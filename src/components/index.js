@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { View, Text } from "react-native";
+import {connect} from "react-redux";
 
 class Index extends Component {
 
@@ -24,14 +25,39 @@ class Index extends Component {
         }
     }
 
+
+    taskList(){
+       return this.props.taskList.map(task => {
+            return (
+
+                <Text>
+                    {task.taskText}
+                </Text>
+
+            )
+        })
+
+    }
+
     render() {
+
+        console.log(this.props)
         return(
-            <Text>
-                Welcome to your personal ToDo-List
-            </Text>
+            <View>
+                {this.taskList()}
+            </View>
+
         )
     }
 
 }
 
-export default Index;
+function mapStateToProps(state){
+
+    return {
+        taskList: state.tasks
+    }
+
+}
+
+export default connect(mapStateToProps)(Index);

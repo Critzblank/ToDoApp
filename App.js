@@ -9,7 +9,7 @@ import {
     Dimensions
 } from 'react-native';
 
-import {store} from './store';
+import store from './store';
 import Index from "./src/components/index";
 import ToDo from "./src/components/ToDo";
 

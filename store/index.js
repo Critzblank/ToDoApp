@@ -2,10 +2,7 @@ import {createStore} from 'redux';
 import reducers from '../src/reducers';
 
 const store = createStore(
-
-    reducers,
-    {}
-
+    reducers
 )
 
 export default store;
