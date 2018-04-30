@@ -47,7 +47,6 @@ class ToDo extends Component {
             </View>
         )
     }
-
 }
 
 const styles = {

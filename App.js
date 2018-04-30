@@ -13,7 +13,6 @@ import store from './store';
 import Index from "./src/components/index";
 import ToDo from "./src/components/ToDo";
 
-
 class App extends Component {
 
     render() {

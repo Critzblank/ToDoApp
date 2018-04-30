@@ -1,11 +1,20 @@
 import React, {Component} from 'react';
-import { View, Text } from "react-native";
+import { View, Text, CheckBox } from "react-native";
 import {connect} from "react-redux";
+import Icon from "react-native-vector-icons/FontAwesome";
+import {removeTask} from "../actions";
 
 class Index extends Component {
 
-    static navigationOptions = ({navigation}) => {
+    constructor(props){
 
+        super(props);
+
+        this.state = {checked: false}
+
+    }
+
+    static navigationOptions = ({navigation}) => {
         return {
             headerTitle: "To-Do",
             headerStyle: {
@@ -29,11 +38,30 @@ class Index extends Component {
     taskList(){
        return this.props.taskList.map(task => {
             return (
+                <View style={styles.TaskStyle}>
+                    <Text style={styles.TaskText} >
+                        {task.taskText}
 
-                <Text>
-                    {task.taskText}
-                </Text>
+                    </Text>
+                    <View>
 
+                    <Icon
+                        name="trash"
+                        size={40}
+                        color="#900"
+                        onPress={() => {
+
+                            this.props.removeTask(task.id)
+                        }}
+                    />
+
+                    </View>
+                    <CheckBox style={styles.CheckBoxStyle}
+
+                              value={this.state.checked}
+                              onChange={() => this.setState({checked: !this.state.checked})}
+                    />
+                </View>
             )
         })
 
@@ -41,7 +69,7 @@ class Index extends Component {
 
     render() {
 
-        console.log(this.props)
+        console.log("STATE",this.state)
         return(
             <View>
                 {this.taskList()}
@@ -53,11 +81,29 @@ class Index extends Component {
 }
 
 function mapStateToProps(state){
-
     return {
         taskList: state.tasks
     }
+}
+
+const styles = {
+
+    TaskStyle: {
+        borderColor: '#000',
+        borderWidth: 0.2,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        height: 80,
+        alignItems: "center"
+    },
+    TaskText: {
+        fontSize: 20,
+
+    },
+    CheckBoxStyle: {
+    }
+
 
 }
 
-export default connect(mapStateToProps)(Index);
+export default connect(mapStateToProps, {removeTask})(Index);
