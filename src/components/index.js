@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {removeTask} from "../actions";
 
+
 class Index extends Component {
 
     constructor(props){
@@ -23,7 +24,11 @@ class Index extends Component {
             headerRight: (
                 <Text
                     onPress = { () => {
-                        navigation.navigate("ToDo");
+                        navigation.navigate("ToDo", {
+                            text: "",
+                            edit: false,
+                            id: null
+                        });
                     }
                     }
 
@@ -39,7 +44,21 @@ class Index extends Component {
        return this.props.taskList.map(task => {
             return (
                 <View style={styles.TaskStyle}>
-                    <Text style={styles.TaskText} >
+                    <Text style={styles.TaskText}
+
+                        onPress ={() => {
+
+                            this.props.navigation.navigate("ToDo", {
+
+                                id: task.id,
+                                text: task.taskText,
+                                edit: true
+
+                            })
+
+                        }}
+
+                    >
                         {task.taskText}
 
                     </Text>
@@ -69,15 +88,13 @@ class Index extends Component {
 
     render() {
 
-        console.log("STATE",this.state)
+        console.log("STATE",this.props)
         return(
             <View>
                 {this.taskList()}
             </View>
-
         )
     }
-
 }
 
 function mapStateToProps(state){
@@ -102,7 +119,6 @@ const styles = {
     },
     CheckBoxStyle: {
     }
-
 
 }
 
